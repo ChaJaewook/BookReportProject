@@ -19,11 +19,12 @@ public class Member {
 
     String name;
 
+    @Enumerated(EnumType.STRING)
     MemberSexual memberSexual;
 
     int age;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
     private List<BookReport> bookReports=new ArrayList<>();
 
 

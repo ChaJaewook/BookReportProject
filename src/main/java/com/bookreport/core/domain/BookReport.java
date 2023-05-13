@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -15,16 +16,26 @@ public class BookReport {
 
     @GeneratedValue
     @Id
-    @Column(name="book_id")
+    @Column(name="bookreport_id")
     private long id;
 
     //독후감을 쓴 회원에 대한 Mapping
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="member_id")
-    Member member;
+    private Member member;
 
     @ManyToOne
     @JoinColumn(name="book_id")
-    Book book;
+    private Book book;
+
+    //책 이름
+    private String book_title;
+
+    //독후감 내용
+    private String content;
+
+    //읽은 날짜
+    private LocalDateTime readDate;
+
 
 }
