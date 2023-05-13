@@ -17,12 +17,12 @@ public class Member {
     @Column(name="member_id")
     private Long id;
 
-    String name;
+    private String name;
 
     @Enumerated(EnumType.STRING)
-    MemberSexual memberSexual;
+    private MemberSexual memberSexual;
 
-    int age;
+    private int age;
 
     @OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
     private List<BookReport> bookReports=new ArrayList<>();
