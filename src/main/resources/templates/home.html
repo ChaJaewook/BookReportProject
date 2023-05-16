@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="home_style.css">-->
+    <link th:href="@{/css/home_style.css}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+    <title>Read Book Project</title>
+    <script src="https://kit.fontawesome.com/46fe72684f.js" crossorigin="anonymous"></script>
+    <!--<script src="home_js.js" defer></script>-->
+    <!--<script type="text/javascript" th:src="@{js/home_js.js}"></script>-->
 </head>
 <body>
+<nav class="navbar">
+    <div class="navbar__logo">
+        <!-- 아이콘 하나 글자-->
+        <i class="fa-duotone fa-book"></i>
+        <a href="">Book Report Project</a>
+    </div>
 
-    <p>hello 독후감을 써볼까요?</p>
+    <ul class="navbar__menu">
+        <li><a href="">Home</a></li>
+        <li><a href="">Gallery</a></li>
+        <li><a href="">Weddings</a></li>
+        <li><a href="">FAQ</a></li>
+        <li><a href="">Bookings</a></li>
+    </ul>
+
+    <ul class="navbar__icons">
+        <li><i class="fa-brands fa-twitter"></i></li>
+        <li><i class="fa-brands fa-facebook-f"></i></li>
+    </ul>
+
+    <a href="#" class="navbar__toggleBtn">
+        <i class="fa-sharp fa-solid fa-bars"></i>
+    </a>
+</nav>
 </body>
 </html>
+
+
+<script>
+    const toggleBtn=document.querySelector('.navbar__toggleBtn');
+    const menu=document.querySelector('.navbar__menu');
+    const icons=document.querySelector('.navbar__icons');
+
+    toggleBtn.addEventListener('click',()=>{
+        menu.classList.toggle('active');
+    icons.classList.toggle('active');
+    });
+</script>
+<!--스타일링 시에는 최상위 박스부터 순서대로 진행-->
