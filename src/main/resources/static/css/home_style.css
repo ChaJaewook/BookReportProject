@@ -64,6 +64,30 @@ a{
     color: var(--accent-color);
 }
 
+.navbar__menu li ul{
+    display:none;
+}
+
+.navbar__menu li:hover ul{
+    display:block;
+    border:1px solid black;
+}
+
+.navbar__menu li ul li:hover a{
+    border-bottom:3px solid black;
+}
+
+
+.floating {
+    background-color: var(--accent-color);
+    position:fixed;
+    right:50%;
+    top:180px;
+    margin-right:-720px;
+    text-align:center;
+    width:12px;
+}
+
 @media screen and (max-width:768px){
     .navbar{
         flex-direction: column;
@@ -97,4 +121,6 @@ a{
     .navbar__icons.active{
         display: flex;
     }
+
+
 }
