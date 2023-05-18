@@ -70,7 +70,8 @@ a{
 
 .navbar__menu li:hover ul{
     display:block;
-    border:1px solid black;
+    list-style:none;
+    text-align:center
 }
 
 .navbar__menu li ul li:hover a{
