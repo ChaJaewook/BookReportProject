@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+  <meta charset="UTF-8">
+  <title>회원 가입</title>
+</head>
+<body>
+<div class="container">
+  <div th:replace="fragments/bodyHeader :: bodyHeader" />
+  <main>
+    <div class="py-5 text-center">
+      <h2>Member List form</h2>
+    </div>
+    <div class="card" style="width: 18rem;" th:each="member:${members}">
+      <div class="card-header" th:text="${member.name}">Empty Name</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" th:text="${member.age}">Empty Age</li>
+        <li class="list-group-item" th:text="${member.memberSexual}">Empty Sexual</li>
+        <li class="list-group-item" >
+          <a href="#" th:href="@{/bookreports/{id} (id=${member.id})}">사용자 독후감 조회</a>
+        </li>
+      </ul>
+    </div>
+
+  </main>
+  <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+
+</body>
+</html>

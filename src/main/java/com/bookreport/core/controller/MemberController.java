@@ -1,6 +1,7 @@
 package com.bookreport.core.controller;
 
 import com.bookreport.core.domain.Member;
+import com.bookreport.core.domain.MemberSexual;
 import com.bookreport.core.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -32,9 +33,15 @@ public class MemberController {
             return "members/createMemberForm";
         }
 
+
         Member member=new Member();
         member.setName(form.getName());
         member.setAge(form.getAge());
+
+        if(form.getSexual()=="man")
+            member.setMemberSexual(MemberSexual.MAN);
+        else
+            member.setMemberSexual(MemberSexual.WOMAN);
 
         memberService.join(member);
         return "redirect:/";
