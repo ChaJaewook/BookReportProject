@@ -38,9 +38,9 @@ public class MemberController {
         member.setName(form.getName());
         member.setAge(form.getAge());
 
-        if(form.getSexual()=="man")
+        if(form.getSexual().equals("man"))
             member.setMemberSexual(MemberSexual.MAN);
-        else
+        else if(form.getSexual().equals("woman"))
             member.setMemberSexual(MemberSexual.WOMAN);
 
         memberService.join(member);

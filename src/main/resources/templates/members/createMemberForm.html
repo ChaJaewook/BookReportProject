@@ -36,17 +36,18 @@
 
 
           <h4 class="col-12">성 별</h4>
-
           <div class="my-3">
             <div class="form-check">
-              <input id="man" name="sexualMethod" value="man" type="radio" class="form-check-input" checked="" required="">
+              <input id="man" name="sexualMethod" th:field="*{sexual}" value="man" type="radio" class="form-check-input" checked="" required="">
               <label class="form-check-label" for="man">Man</label>
             </div>
             <div class="form-check">
-              <input id="woman" name="sexualMethod" value="woman" type="radio" class="form-check-input" required="">
+              <input id="woman" name="sexualMethod" th:field="*{sexual}" value="woman" type="radio" class="form-check-input" required="">
               <label class="form-check-label" for="woman">Woman</label>
             </div>
           </div>
+
+
         </div>
 
 
