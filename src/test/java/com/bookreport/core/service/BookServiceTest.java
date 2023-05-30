@@ -31,7 +31,7 @@ public class BookServiceTest {
         book.setTitle("바람과 함께 사라지다.");
 
         //when
-        Long saveId=bookService.save(book);
+        Long saveId=bookService.saveBook(book);
 
         //then
         Assertions.assertEquals(book,bookRepository.findOne(saveId));

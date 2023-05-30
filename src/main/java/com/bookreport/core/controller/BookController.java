@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,14 +36,51 @@ public class BookController {
         }
 
         Book book=new Book();
+        DateTimeFormatter DATEFORMATTER=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate ld=LocalDate.parse(form.getPublish_date(),DATEFORMATTER);
+        LocalDateTime ldt=LocalDateTime.of(ld,LocalDateTime.now().toLocalTime());
+
+
+        double bookGrade=0;
+        switch(form.getGrade())
+        {
+            case "BSET":
+                bookGrade=5.0;
+                break;
+            case "BETTER":
+                bookGrade=4.0;
+                break;
+            case "GOOD":
+                bookGrade=3.0;
+                break;
+            case "NORMAL":
+                bookGrade=2.0;
+                break;
+            case "BAD":
+                bookGrade=1.0;
+                break;
+            default:
+                break;
+        }
 
         book.setTitle(form.getTitle());
         book.setAuthor(form.getAuthor());
-        book.setGrade(form.getGrade());
+        book.setGrade(bookGrade);
         book.setIsbn(form.getIsbn());
-        book.setPublish_date(form.getPublish_date());
+        book.setPublish_date(ldt);
 
         bookRepository.save(book);
+        System.out.println("성공");
         return "redirect:/";
+    }
+
+    @GetMapping("/books")
+    public String list(Model model)
+    {
+        List<Book> books=new ArrayList<>();
+        books=bookRepository.findAll();
+        model.addAttribute("books",books);
+
+        return "books/bookList";
     }
 }

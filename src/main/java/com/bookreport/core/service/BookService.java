@@ -22,7 +22,7 @@ public class BookService {
     private final BookRepository bookRepository;
 
     @Transactional
-    public Long save(Book book){
+    public Long saveBook(Book book){
         bookRepository.save(book);
         return book.getId();
     }
@@ -31,6 +31,7 @@ public class BookService {
         return bookRepository.findAll();
     }
 
+    @Transactional
     public Book findOne(Long book_id)
     {
         return bookRepository.findOne(book_id);

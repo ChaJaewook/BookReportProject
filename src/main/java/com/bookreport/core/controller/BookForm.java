@@ -15,13 +15,13 @@ public class BookForm {
 
     private String author;
 
-    private double grade;
+    private String grade;
 
     @NotEmpty(message = "isbn 코드는 필수 입니다.")
     private String isbn;
 
     private long sold;
 
-    private LocalDateTime publish_date;
+    private String publish_date;
 
 }
