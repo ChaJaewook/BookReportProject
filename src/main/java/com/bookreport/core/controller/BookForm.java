@@ -24,4 +24,6 @@ public class BookForm {
 
     private String publish_date;
 
+    private String category;
+
 }

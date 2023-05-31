@@ -1,12 +1,15 @@
 package com.bookreport.core.controller;
 
 import com.bookreport.core.domain.Book;
+import com.bookreport.core.domain.BookCategory;
 import com.bookreport.core.repository.BookRepository;
+import com.bookreport.core.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,7 +23,8 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class BookController {
-    private final BookRepository bookRepository;
+
+    private final BookService bookService;
 
     @GetMapping("/books/new")
     public String createForm(Model model){
@@ -44,7 +48,7 @@ public class BookController {
         double bookGrade=0;
         switch(form.getGrade())
         {
-            case "BSET":
+            case "BEST":
                 bookGrade=5.0;
                 break;
             case "BETTER":
@@ -63,13 +67,28 @@ public class BookController {
                 break;
         }
 
+        switch(form.getCategory())
+        {
+            case "COMIC":
+                book.setBookCategory(BookCategory.COMIC);
+                break;
+            case "HISTORY":
+                book.setBookCategory(BookCategory.HISTORY);
+                break;
+            case "DOCUMENTARY":
+                book.setBookCategory(BookCategory.DOCUMENTARY);
+                break;
+        }
+
         book.setTitle(form.getTitle());
         book.setAuthor(form.getAuthor());
         book.setGrade(bookGrade);
+        book.setSold(form.getSold());
         book.setIsbn(form.getIsbn());
+
         book.setPublish_date(ldt);
 
-        bookRepository.save(book);
+        bookService.saveBook(book);
         System.out.println("성공");
         return "redirect:/";
     }
@@ -78,9 +97,39 @@ public class BookController {
     public String list(Model model)
     {
         List<Book> books=new ArrayList<>();
-        books=bookRepository.findAll();
+        books=bookService.findBooks();
         model.addAttribute("books",books);
 
         return "books/bookList";
+    }
+
+    @PostMapping("/books/{bookId}/edit")
+    public String updateItemForm(@PathVariable("bookId") Long bookId, Model model)
+    {
+        Book book=bookService.findOne(bookId);
+
+        BookForm bookForm=new BookForm();
+        bookForm.setAuthor(book.getAuthor());
+        bookForm.setSold(book.getSold());
+        bookForm.setIsbn(book.getIsbn());
+
+        String grade="";
+        if(book.getGrade()==5.0)
+            grade="BEST";
+        else if(book.getGrade()==4.0)
+            grade="BETTER";
+        else if(book.getGrade()==3.0)
+            grade="GOOD";
+        else if(book.getGrade()==2.0)
+            grade="NORMAL";
+        else if(book.getGrade()==1.0)
+            grade="BAD";
+        bookForm.setGrade(grade);
+        bookForm.setPublish_date(book.getPublish_date().toString());
+        bookForm.setTitle(book.getTitle());
+
+
+        model.addAttribute("form",bookForm);
+        return "/books/updateBookForm";
     }
 }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <meta charset="UTF-8">
+    <title>회원 가입</title>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader" />
+    <main>
+        <div class="py-5 text-center">
+            <h2>Book Create form</h2>
+        </div>
+
+
+        <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">책 등록 창입니다.</h4>
+            <form class="needs-validation" action="/books/new" th:object="${bookForm}" method="post">
+                <div class="row g-3">
+
+                    <div class="col-12">
+                        <label for="title" class="form-label">Book Title</label>
+                        <input type="text" class="form-control" th:field="*{title}" id="title" placeholder="책 제목을 입력하세요" required="">
+                        <div class="invalid-feedback">
+                            Please enter your Book Title
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="author" class="form-label">Author</label>
+                        <input type="text" class="form-control" th:field="*{author}" id="author" placeholder="저자를 입력하세요" required="">
+                        <div class="invalid-feedback">
+                            Please enter author.
+                        </div>
+                    </div>
+
+
+                    <div class="col-12">
+                        <label for="grade" class="form-label">Select Grade</label>
+                        <select th:field="*{grade}" class="form-select" id="grade" required>
+                            <option value="BEST">Best</option>
+                            <option value="BETTER">Better</option>
+                            <option value="GOOD">Good</option>
+                            <option value="NORMAL">Normal</option>
+                            <option value="BAD">Bad</option>
+                        </select>
+                        <div class="invalid-feedback">Please select</div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="isbn" class="form-label">ISBN</label>
+                        <input type="text" class="form-control" th:field="*{isbn}" id="isbn" placeholder="isbn을 입력하세요" required="">
+                        <div class="invalid-feedback">
+                            Please enter ISBN.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="sold" class="form-label">Sold</label>
+                        <input type="text" class="form-control" th:field="*{sold}" id="sold" placeholder="수량을 입력하세요" required="">
+                        <div class="invalid-feedback">
+                            Please enter Sold.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="publish_date" class="form-label">Publish Date</label>
+                        <input type="date" class="form-control" th:field="*{publish_date}" id="publish_date" placeholder="출판일을 선택하세요" required="">
+                        <div class="invalid-feedback">
+                            Please enter Publish Date.
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="category" class="form-label">Select Category</label>
+                        <select th:field="*{category}" class="form-select" id="category" required>
+                            <option value="COMIC">COMIC</option>
+                            <option value="HISTORY">HISTORY</option>
+                            <option value="DOCUMENTARY">DOCUMENTARY</option>
+                        </select>
+                        <div class="invalid-feedback">Please select Category</div>
+                    </div>
+
+                </div>
+
+
+                <hr class="my-4">
+
+                <button class="w-100 btn btn-primary btn-lg" type="submit">등록하기</button>
+            </form>
+        </div>
+    </main>
+    <div th:replace="fragments/footer :: footer" />
+</div> <!-- /container -->
+
+</body>
+</html>

@@ -57,7 +57,7 @@
 
           <div class="col-12">
           <label for="sold" class="form-label">Sold</label>
-          <input type="text" class="form-control" th:field="*{sold}" id="sold" placeholder="isbn을 입력하세요" required="">
+          <input type="text" class="form-control" th:field="*{sold}" id="sold" placeholder="수량을 입력하세요" required="">
           <div class="invalid-feedback">
             Please enter Sold.
           </div>
@@ -69,6 +69,16 @@
           <div class="invalid-feedback">
             Please enter Publish Date.
           </div>
+          </div>
+
+          <div class="col-12">
+            <label for="category" class="form-label">Select Category</label>
+            <select th:field="*{category}" class="form-select" id="category" required>
+              <option value="COMIC">COMIC</option>
+              <option value="HISTORY">HISTORY</option>
+              <option value="DOCUMENTARY">DOCUMENTARY</option>
+            </select>
+            <div class="invalid-feedback">Please select Category</div>
           </div>
 
         </div>
