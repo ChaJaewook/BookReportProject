@@ -96,19 +96,19 @@ public class BookController {
     @GetMapping("/books")
     public String list(Model model)
     {
-        List<Book> books=new ArrayList<>();
-        books=bookService.findBooks();
+        List<Book> books=bookService.findBooks();
         model.addAttribute("books",books);
 
         return "books/bookList";
     }
 
-    @PostMapping("/books/{bookId}/edit")
-    public String updateItemForm(@PathVariable("bookId") Long bookId, Model model)
+    @GetMapping("/books/{id}/edit")
+    public String updateItemForm(@PathVariable("id") Long bookId, Model model)
     {
-        Book book=bookService.findOne(bookId);
+        Book book=(Book)bookService.findOne(bookId);
 
         BookForm bookForm=new BookForm();
+        bookForm.setId(book.getId());
         bookForm.setAuthor(book.getAuthor());
         bookForm.setSold(book.getSold());
         bookForm.setIsbn(book.getIsbn());

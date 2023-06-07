@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class BookForm {
+    private Long id;
 
     @NotEmpty(message="책 이름은 필수 입니다.")
     private String title;

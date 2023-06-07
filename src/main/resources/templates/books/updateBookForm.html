@@ -2,33 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header">
     <meta charset="UTF-8">
-    <title>회원 가입</title>
+    <title>책 수정 창</title>
 </head>
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
     <main>
         <div class="py-5 text-center">
-            <h2>Book Create form</h2>
+            <h2>Book Update form</h2>
         </div>
 
 
         <div class="col-md-7 col-lg-8">
-            <h4 class="mb-3">책 등록 창입니다.</h4>
-            <form class="needs-validation" action="/books/new" th:object="${bookForm}" method="post">
+            <h4 class="mb-3">책 수정 창입니다.</h4>
+
+            <form class="needs-validation" th:object="${form}" method="post">
+                <!--<input type="hidden" th:field="*{id}"/>-->
                 <div class="row g-3">
 
                     <div class="col-12">
-                        <label for="title" class="form-label">Book Title</label>
-                        <input type="text" class="form-control" th:field="*{title}" id="title" placeholder="책 제목을 입력하세요" required="">
+                        <label th:for="title" class="form-label">Book Title</label>
+                        <input type="text" class="form-control" th:field="*{title}">
                         <div class="invalid-feedback">
                             Please enter your Book Title
                         </div>
                     </div>
 
                     <div class="col-12">
-                        <label for="author" class="form-label">Author</label>
-                        <input type="text" class="form-control" th:field="*{author}" id="author" placeholder="저자를 입력하세요" required="">
+                        <label th:for="author" class="form-label">Author</label>
+                        <input type="text" class="form-control" th:field="*{author}" >
                         <div class="invalid-feedback">
                             Please enter author.
                         </div>
