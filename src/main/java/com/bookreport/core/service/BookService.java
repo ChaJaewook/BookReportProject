@@ -1,5 +1,6 @@
 package com.bookreport.core.service;
 
+import com.bookreport.core.controller.BookForm;
 import com.bookreport.core.domain.Book;
 import com.bookreport.core.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,14 @@ public class BookService {
     public Long saveBook(Book book){
         bookRepository.save(book);
         return book.getId();
+    }
+
+    @Transactional
+    public void updateBook(Long bookId, BookForm param)
+    {
+        Book findBook=bookRepository.findOne(bookId);
+        findBook.setAuthor(param.getAuthor());
+        findBook.setTitle(param.getTitle());
     }
 
     public List<Book> findBooks(){

@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -103,7 +100,7 @@ public class BookController {
     }
 
     @GetMapping("/books/{id}/edit")
-    public String updateItemForm(@PathVariable("id") Long bookId, Model model)
+    public String updateBookForm(@PathVariable("id") Long bookId, Model model)
     {
         Book book=(Book)bookService.findOne(bookId);
 
@@ -131,5 +128,11 @@ public class BookController {
 
         model.addAttribute("form",bookForm);
         return "/books/updateBookForm";
+    }
+
+    @PostMapping("/books/{bookId}/edit")
+    public String updateBook(@PathVariable("bookId") Long bookId,@ModelAttribute("form") BookForm form){
+        bookService.updateBook(bookId,form);
+        return "redirect:/books";
     }
 }
