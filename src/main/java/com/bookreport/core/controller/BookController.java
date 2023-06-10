@@ -86,7 +86,6 @@ public class BookController {
         book.setPublish_date(ldt);
 
         bookService.saveBook(book);
-        System.out.println("성공");
         return "redirect:/";
     }
 

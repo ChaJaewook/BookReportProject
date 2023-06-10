@@ -1,5 +1,6 @@
 package com.bookreport.core.service;
 
+import com.bookreport.core.controller.MemberForm;
 import com.bookreport.core.domain.Member;
 import com.bookreport.core.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,5 +45,15 @@ public class MemberService {
     public Member findOne(Long memberId)
     {
         return memberRepository.findOne(memberId);
+    }
+
+    @Transactional
+    public void updateMember(Long memberId, MemberForm form){
+        Member findMember= memberRepository.findOne(memberId);
+
+        findMember.setName(form.getName());
+        findMember.setAge(form.getAge());
+        findMember.setName(form.getName());
+
     }
 }

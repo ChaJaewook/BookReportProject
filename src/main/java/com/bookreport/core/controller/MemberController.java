@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -53,6 +54,28 @@ public class MemberController {
         List<Member> members=memberService.findMembers();
         model.addAttribute("members",members);
         return "members/memberList";
+    }
+
+    @GetMapping("/members/{memberId}/edit")
+    public String updateMemberForm(@PathVariable("memberId") Long memberId, Model model)
+    {
+        Member findMember=memberService.findOne(memberId);
+        MemberForm form=new MemberForm();
+        form.setId(findMember.getId());
+        form.setAge(findMember.getAge());
+        form.setSexual(String.valueOf(findMember.getMemberSexual()== MemberSexual.MAN?MemberSexual.MAN:MemberSexual.WOMAN));
+        form.setName(findMember.getName());
+
+        model.addAttribute("member",form);
+        return "/members/updateMemberForm";
+
+    }
+
+    @PostMapping("members/{memberId}/edit")
+    public String updateMember(@PathVariable("memberId")Long id, MemberForm form)
+    {
+        memberService.updateMember(id, form);
+        return "redirect:/members";
     }
 
 }
