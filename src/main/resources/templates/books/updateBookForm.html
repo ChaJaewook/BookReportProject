@@ -40,18 +40,18 @@
                     <div class="col-12">
                         <label for="grade" class="form-label">Select Grade</label>
                         <select th:field="*{grade}" class="form-select" id="grade" required>
-                            <option value="BEST">Best</option>
-                            <option value="BETTER">Better</option>
-                            <option value="GOOD">Good</option>
-                            <option value="NORMAL">Normal</option>
-                            <option value="BAD">Bad</option>
+                            <option th:selected="${grade}=='BEST'" value="BEST">Best</option>
+                            <option th:selected="${grade}=='BETTER'"  value="BETTER">Better</option>
+                            <option th:selected="${grade}=='GOOD'" value="GOOD">Good</option>
+                            <option th:selected="${grade}=='NORMAL'" value="NORMAL">Normal</option>
+                            <option th:selected="${grade}=='BAD'" value="BAD">Bad</option>
                         </select>
                         <div class="invalid-feedback">Please select</div>
                     </div>
 
                     <div class="col-12">
                         <label for="isbn" class="form-label">ISBN</label>
-                        <input type="text" class="form-control" th:field="*{isbn}" id="isbn" placeholder="isbn을 입력하세요" required="">
+                        <input  type="text" class="form-control" th:field="*{isbn}" id="isbn" placeholder="isbn을 입력하세요" disabled>
                         <div class="invalid-feedback">
                             Please enter ISBN.
                         </div>
@@ -67,7 +67,7 @@
 
                     <div class="col-12">
                         <label for="publish_date" class="form-label">Publish Date</label>
-                        <input type="date" class="form-control" th:field="*{publish_date}" id="publish_date" placeholder="출판일을 선택하세요" required="">
+                        <input type="date" class="form-control" th:field="*{publish_date}" id="publish_date" placeholder="출판일을 선택하세요" disabled>
                         <div class="invalid-feedback">
                             Please enter Publish Date.
                         </div>
@@ -76,9 +76,9 @@
                     <div class="col-12">
                         <label for="category" class="form-label">Select Category</label>
                         <select th:field="*{category}" class="form-select" id="category" required>
-                            <option value="COMIC">COMIC</option>
-                            <option value="HISTORY">HISTORY</option>
-                            <option value="DOCUMENTARY">DOCUMENTARY</option>
+                            <option th:selected="${category}=='COMIC'" value="COMIC">Comic</option>
+                            <option th:selected="${category}=='HISTORY'" value="HISTORY">History</option>
+                            <option th:selected="${category}=='DOCUMENTARY'" value="DOCUMENTARY">Documentary</option>
                         </select>
                         <div class="invalid-feedback">Please select Category</div>
                     </div>
