@@ -36,4 +36,10 @@ public class BookRepository {
                 .setParameter("title",title)
                 .getResultList();
     }
+
+    public Long delete(Book book)
+    {
+        em.remove(book);
+        return book.getId();
+    }
 }

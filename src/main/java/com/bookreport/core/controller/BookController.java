@@ -135,4 +135,12 @@ public class BookController {
         bookService.updateBook(bookId,form);
         return "redirect:/books";
     }
+
+    @GetMapping("/books/{bookId}/delete")
+    public String deleteBook(@PathVariable("bookId") Long bookId)
+    {
+        bookService.deleteBook(bookId);
+        return "redirect:/books";
+    }
+
 }

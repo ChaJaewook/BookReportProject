@@ -57,6 +57,13 @@ public class BookService {
         findBook.setTitle(param.getTitle());
     }
 
+    @Transactional
+    public void deleteBook(Long id)
+    {
+        Book findBook=bookRepository.findOne(id);
+        bookRepository.delete(findBook);
+    }
+
     public List<Book> findBooks(){
         return bookRepository.findAll();
     }
