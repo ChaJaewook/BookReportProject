@@ -11,11 +11,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,7 +33,7 @@ public class BookController {
     }
 
     @PostMapping("/books/new")
-    public String create(@Valid BookForm form, BindingResult result){
+    public String create(@Valid BookForm form, BindingResult result) throws IOException {
         if(result.hasErrors())
         {
             return "/books/createBookForm";
@@ -40,6 +43,23 @@ public class BookController {
         DateTimeFormatter DATEFORMATTER=DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate ld=LocalDate.parse(form.getPublish_date(),DATEFORMATTER);
         LocalDateTime ldt=LocalDateTime.of(ld,LocalDateTime.now().toLocalTime());
+
+        String oriImgName=form.getImgFile().getOriginalFilename();
+        String imgName="";
+
+        String projectPath=System.getProperty("user.dir")+"/src/main/resources/static/img/";
+        UUID uuid= UUID.randomUUID();
+
+        String savedFileName=uuid+"_"+oriImgName;
+
+        imgName=savedFileName;
+
+        File saveFile=new File(projectPath,imgName);
+
+        form.getImgFile().transferTo(saveFile);
+
+        book.setImgName(imgName);
+        book.setImgPath("/img/"+imgName);
 
 
         double bookGrade=0;

@@ -15,7 +15,9 @@
 
     <div class="col-md-7 col-lg-8">
       <h4 class="mb-3">책 등록 창입니다.</h4>
-      <form class="needs-validation" action="/books/new" th:object="${bookForm}" method="post">
+      <!-- enctype은 form데이터가 날아갈때 인코딩 타입을 설정 post에서만 사용가능-->
+      <!-- form 요소가 이미지나 파일일 경우 자주 사용-->
+      <form class="needs-validation" action="/books/new" th:object="${bookForm}" method="post" enctype="multipart/form-data">
         <div class="row g-3">
 
           <div class="col-12">
@@ -79,6 +81,11 @@
               <option value="DOCUMENTARY">DOCUMENTARY</option>
             </select>
             <div class="invalid-feedback">Please select Category</div>
+          </div>
+
+          <div class="col-12">
+            <label for="imgFile" class="form-label">Upload Book Image</label>
+            <input type="file" th:field="*{imgFile}" class="form-select" id="imgFile" required/>
           </div>
 
         </div>

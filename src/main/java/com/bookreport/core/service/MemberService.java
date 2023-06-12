@@ -56,4 +56,12 @@ public class MemberService {
         findMember.setName(form.getName());
 
     }
+
+    @Transactional
+    public Long deleteMember(Long id)
+    {
+        Member removeMember= memberRepository.findOne(id);
+        memberRepository.delete(removeMember);
+        return id;
+    }
 }

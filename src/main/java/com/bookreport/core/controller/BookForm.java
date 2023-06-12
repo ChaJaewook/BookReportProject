@@ -2,6 +2,7 @@ package com.bookreport.core.controller;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
@@ -27,4 +28,5 @@ public class BookForm {
 
     private String category;
 
+    private MultipartFile imgFile;
 }

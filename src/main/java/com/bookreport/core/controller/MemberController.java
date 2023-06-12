@@ -34,7 +34,6 @@ public class MemberController {
             return "members/createMemberForm";
         }
 
-
         Member member=new Member();
         member.setName(form.getName());
         member.setAge(form.getAge());
@@ -76,6 +75,13 @@ public class MemberController {
     {
         memberService.updateMember(id, form);
         return "redirect:/members";
+    }
+
+    @GetMapping("members/{memberId}/delete")
+    public String deleteMember(@PathVariable("memberId")Long id)
+    {
+        memberService.deleteMember(id);
+        return "redirect:/memberList";
     }
 
 }
