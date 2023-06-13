@@ -81,7 +81,7 @@ public class MemberController {
     public String deleteMember(@PathVariable("memberId")Long id)
     {
         memberService.deleteMember(id);
-        return "redirect:/memberList";
+        return "redirect:/members";
     }
 
 }
