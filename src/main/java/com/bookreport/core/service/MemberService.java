@@ -2,6 +2,7 @@ package com.bookreport.core.service;
 
 import com.bookreport.core.controller.MemberForm;
 import com.bookreport.core.domain.Member;
+import com.bookreport.core.domain.MemberSexual;
 import com.bookreport.core.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,11 @@ public class MemberService {
 
         findMember.setName(form.getName());
         findMember.setAge(form.getAge());
-        findMember.setName(form.getName());
+
+        if(form.getSexual().equals("MAN"))
+            findMember.setMemberSexual(MemberSexual.MAN);
+        else if(form.getSexual().equals("WOMAN"))
+            findMember.setMemberSexual(MemberSexual.WOMAN);
 
     }
 
