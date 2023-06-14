@@ -7,10 +7,6 @@ import lombok.Setter;
 @Setter
 public class BookReportForm {
 
-    private Long bookReportId;
-    private String bookTitle;
     private String content;
-    private String bookId;
-    private String memberId;
 
 }
