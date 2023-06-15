@@ -28,8 +28,6 @@ public class BookReport {
     @JoinColumn(name="book_id")
     private Book book;
 
-    //책 이름
-    private String book_title;
 
     //독후감 내용
     private String content;
@@ -37,5 +35,14 @@ public class BookReport {
     //읽은 날짜
     private LocalDateTime readDate;
 
+    //생성메서드
+    public static BookReport createBookReport(Member member, Book book, String content)
+    {
+        BookReport bookReport=new BookReport();
+        bookReport.setBook(book);
+        bookReport.setMember(member);
+        bookReport.setContent(content);
 
+        return bookReport;
+    }
 }
