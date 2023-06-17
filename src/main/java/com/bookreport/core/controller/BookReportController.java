@@ -1,6 +1,7 @@
 package com.bookreport.core.controller;
 
 import com.bookreport.core.domain.Book;
+import com.bookreport.core.domain.BookReport;
 import com.bookreport.core.domain.Member;
 import com.bookreport.core.service.BookReportService;
 import com.bookreport.core.service.BookService;
@@ -23,7 +24,7 @@ public class BookReportController {
     private final BookService bookService;
     private final MemberService memberService;
 
-    @GetMapping("/bookreport")
+    @GetMapping("/bookreports/new")
     public String createForm(Model model)
     {
         List<Member> members=memberService.findMembers();
@@ -36,13 +37,22 @@ public class BookReportController {
         return "bookreports/bookReportForm";
     }
 
-    @PostMapping("/bookreport")
+    @PostMapping("/bookreports/new")
     public String bookReport(@RequestParam("memberId") Long memberId,
                              @RequestParam("bookId")Long bookId,
                              @Valid BookReportForm form)
     {
         bookReportService.write(memberId, bookId, form.getContent());
         return "redirect:/";
+    }
+
+    @GetMapping("/bookreports")
+    public String List(Model model)
+    {
+        List<BookReport> bookReportList=bookReportService.findBookReports();
+        model.addAttribute("bookreports",bookReportList);
+
+        return "bookreports/bookReportList";
     }
 
 }
