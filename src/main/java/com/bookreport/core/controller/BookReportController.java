@@ -42,7 +42,7 @@ public class BookReportController {
                              @Valid BookReportForm form)
     {
         bookReportService.write(memberId, bookId, form.getContent());
-        return "redirect:/bookReports";
+        return "redirect:/";
     }
 
 }

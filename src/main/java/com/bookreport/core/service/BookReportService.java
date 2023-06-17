@@ -35,6 +35,7 @@ public class BookReportService {
         return bookReportRepository.findAll();
     }
 
+    @Transactional
     public Long write(Long memberId, Long bookId, String content)
     {
         //엔티티 조회
@@ -43,7 +44,7 @@ public class BookReportService {
 
         // BookReport 생성
         BookReport bookReport=BookReport.createBookReport(member,book,content);
-
+        bookReportRepository.save(bookReport);
         return bookReport.getId();
     }
 

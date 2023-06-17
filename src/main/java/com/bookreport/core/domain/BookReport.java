@@ -1,9 +1,6 @@
 package com.bookreport.core.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor(access= AccessLevel.PROTECTED)
+@ToString
 public class BookReport {
 
     @GeneratedValue
@@ -43,6 +41,9 @@ public class BookReport {
         bookReport.setMember(member);
         bookReport.setContent(content);
 
+
         return bookReport;
     }
+
+
 }

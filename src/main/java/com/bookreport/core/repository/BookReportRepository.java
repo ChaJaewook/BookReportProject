@@ -17,6 +17,7 @@ public class BookReportRepository {
 
     public void save(BookReport bookReport)
     {
+        System.out.println(bookReport.toString());
         em.persist(bookReport);
     }
 
