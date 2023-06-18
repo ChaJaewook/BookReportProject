@@ -30,6 +30,11 @@ public class BookReportService {
         return bookReportRepository.findOne(book_report_id);
     }
 
+    public List<BookReport> searchMember(Long memberId)
+    {
+        return bookReportRepository.findByMemberId(memberId);
+    }
+
     public List<BookReport> findBookReports()
     {
         return bookReportRepository.findAll();

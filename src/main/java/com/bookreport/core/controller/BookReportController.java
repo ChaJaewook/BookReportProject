@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -50,6 +51,15 @@ public class BookReportController {
     public String List(Model model)
     {
         List<BookReport> bookReportList=bookReportService.findBookReports();
+        model.addAttribute("bookreports",bookReportList);
+
+        return "bookreports/bookReportList";
+    }
+
+    @GetMapping("/bookreports/{id}")
+    public String ListUser(@PathVariable("id")Long memberId, Model model)
+    {
+        List<BookReport> bookReportList=bookReportService.searchMember(memberId);
         model.addAttribute("bookreports",bookReportList);
 
         return "bookreports/bookReportList";

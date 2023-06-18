@@ -39,4 +39,19 @@ public class BookReportRepository {
                 .getResultList();
     }
 
+    public List<BookReport> findByMemberId(Long memberId)
+    {
+        //검색로직
+        return em.createQuery("select m from BookReport m join m.member o"+
+                                " where o.id=:memberid",
+                        BookReport.class)
+                .setParameter("memberid", memberId)
+                .getResultList();
+
+        /*return em.createQuery("select m from BookReport m join m.member o",
+                        BookReport.class)
+                .getResultList();*/
+        //order와 member를 join
+    }
+
 }
