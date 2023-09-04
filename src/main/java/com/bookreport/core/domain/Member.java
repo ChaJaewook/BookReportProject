@@ -1,5 +1,6 @@
 package com.bookreport.core.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Member {
+public class Member extends BasedEntity{
 
     @Id
     @GeneratedValue
@@ -24,8 +25,18 @@ public class Member {
 
     private int age;
 
-    @OneToMany(mappedBy = "member",fetch = FetchType.LAZY)
+    @Embedded
+    private Address address;
+
+    @OneToMany(mappedBy = "member",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<BookReport> bookReports=new ArrayList<>();
 
-
+    @Builder
+    public Member(Long id, String name, MemberSexual memberSexual, int age, Address address) {
+        this.id = id;
+        this.name = name;
+        this.memberSexual = memberSexual;
+        this.age = age;
+        this.address = address;
+    }
 }

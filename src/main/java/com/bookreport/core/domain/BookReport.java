@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor(access= AccessLevel.PROTECTED)
 @ToString
-public class BookReport {
+public class BookReport extends BasedEntity{
 
     @GeneratedValue
     @Id
@@ -32,6 +32,17 @@ public class BookReport {
 
     //읽은 날짜
     private LocalDateTime readDate;
+
+    @Builder
+    public BookReport(long id, Member member, Book book, String content, LocalDateTime readDate) {
+        this.id = id;
+        this.member = member;
+        this.book = book;
+        this.content = content;
+        this.readDate = readDate;
+    }
+
+
 
     //생성메서드
     public static BookReport createBookReport(Member member, Book book, String content)

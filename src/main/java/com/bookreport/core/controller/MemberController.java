@@ -34,14 +34,18 @@ public class MemberController {
             return "members/createMemberForm";
         }
 
-        Member member=new Member();
-        member.setName(form.getName());
-        member.setAge(form.getAge());
+        MemberSexual memS=null;
 
         if(form.getSexual().equals("man"))
-            member.setMemberSexual(MemberSexual.MAN);
+            memS=MemberSexual.MAN;
         else if(form.getSexual().equals("woman"))
-            member.setMemberSexual(MemberSexual.WOMAN);
+            memS= MemberSexual.WOMAN;
+
+        Member member=Member.builder()
+                .memberSexual(memS)
+                .name(form.getName())
+                .age(form.getAge())
+                .build();
 
         memberService.join(member);
         return "redirect:/";

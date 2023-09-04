@@ -27,8 +27,8 @@ public class BookServiceTest {
     public void 책추가()
     {
         //given
-        Book book=new Book();
-        book.setTitle("바람과 함께 사라지다.");
+
+        Book book=Book.builder().title("바람과 함께 사라지다.").build();
 
         //when
         Long saveId=bookService.saveBook(book);

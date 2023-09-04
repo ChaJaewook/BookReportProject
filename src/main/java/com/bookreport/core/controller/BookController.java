@@ -39,9 +39,9 @@ public class BookController {
             return "/books/createBookForm";
         }
 
-        Book book=new Book();
-        DateTimeFormatter DATEFORMATTER=DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate ld=LocalDate.parse(form.getPublish_date(),DATEFORMATTER);
+        //Book book=new Book();
+        DateTimeFormatter dateF=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate ld=LocalDate.parse(form.getPublish_date(),dateF);
         LocalDateTime ldt=LocalDateTime.of(ld,LocalDateTime.now().toLocalTime());
 
         String oriImgName=form.getImgFile().getOriginalFilename();
@@ -58,8 +58,6 @@ public class BookController {
 
         form.getImgFile().transferTo(saveFile);
 
-        book.setImgName(imgName);
-        book.setImgPath("/img/"+imgName);
 
 
         double bookGrade=0;
@@ -84,26 +82,30 @@ public class BookController {
                 break;
         }
 
+        BookCategory bookC=null;
         switch(form.getCategory())
         {
             case "COMIC":
-                book.setBookCategory(BookCategory.COMIC);
+                bookC=BookCategory.COMIC;
                 break;
             case "HISTORY":
-                book.setBookCategory(BookCategory.HISTORY);
+                bookC=BookCategory.HISTORY;
                 break;
             case "DOCUMENTARY":
-                book.setBookCategory(BookCategory.DOCUMENTARY);
+                bookC=BookCategory.DOCUMENTARY;
                 break;
         }
 
-        book.setTitle(form.getTitle());
-        book.setAuthor(form.getAuthor());
-        book.setGrade(bookGrade);
-        book.setSold(form.getSold());
-        book.setIsbn(form.getIsbn());
-
-        book.setPublish_date(ldt);
+        Book book=Book.builder()
+                .title(form.getTitle())
+                .author(form.getAuthor())
+                .grade(bookGrade)
+                .sold(form.getSold())
+                .isbn(form.getIsbn())
+                .imgPath("/img/"+imgName)
+                .imgName(imgName)
+                .publish_date(ldt)
+                .build();
 
         bookService.saveBook(book);
         return "redirect:/";

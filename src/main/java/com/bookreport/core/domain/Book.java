@@ -1,5 +1,6 @@
 package com.bookreport.core.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +11,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
-public class Book {
+public class Book extends BasedEntity{
     @Id
     @GeneratedValue
     @Column(name="book_id")
@@ -45,4 +45,18 @@ public class Book {
 
     @OneToMany(mappedBy = "book",fetch = FetchType.LAZY)
     private List<BookReport> bookReport=new ArrayList<>();
+
+    @Builder
+    public Book(long id, BookCategory bookCategory, String title, String author, double grade, String isbn, long sold, LocalDateTime publish_date, String imgName, String imgPath) {
+        this.id = id;
+        this.bookCategory = bookCategory;
+        this.title = title;
+        this.author = author;
+        this.grade = grade;
+        this.isbn = isbn;
+        this.sold = sold;
+        this.publish_date = publish_date;
+        this.imgName = imgName;
+        this.imgPath = imgPath;
+    }
 }
