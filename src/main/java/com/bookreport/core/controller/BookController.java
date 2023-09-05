@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,7 +38,8 @@ public class BookController {
             return "/books/createBookForm";
         }
 
-        //Book book=new Book();
+        BookCategory bookC=null;
+
         DateTimeFormatter dateF=DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate ld=LocalDate.parse(form.getPublish_date(),dateF);
         LocalDateTime ldt=LocalDateTime.of(ld,LocalDateTime.now().toLocalTime());
@@ -82,7 +82,6 @@ public class BookController {
                 break;
         }
 
-        BookCategory bookC=null;
         switch(form.getCategory())
         {
             case "COMIC":
@@ -100,11 +99,11 @@ public class BookController {
                 .title(form.getTitle())
                 .author(form.getAuthor())
                 .grade(bookGrade)
-                .sold(form.getSold())
                 .isbn(form.getIsbn())
                 .imgPath("/img/"+imgName)
                 .imgName(imgName)
                 .publish_date(ldt)
+                .bookCategory(bookC)
                 .build();
 
         bookService.saveBook(book);
@@ -128,7 +127,6 @@ public class BookController {
         BookForm bookForm=new BookForm();
         bookForm.setId(book.getId());
         bookForm.setAuthor(book.getAuthor());
-        bookForm.setSold(book.getSold());
         bookForm.setIsbn(book.getIsbn());
 
         String grade="";

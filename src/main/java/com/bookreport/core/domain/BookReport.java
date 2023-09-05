@@ -3,6 +3,7 @@ package com.bookreport.core.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -28,13 +29,14 @@ public class BookReport extends BasedEntity{
 
 
     //독후감 내용
+    @Lob
     private String content;
 
     //읽은 날짜
-    private LocalDateTime readDate;
+    private LocalDate readDate;
 
     @Builder
-    public BookReport(long id, Member member, Book book, String content, LocalDateTime readDate) {
+    public BookReport(long id, Member member, Book book, String content, LocalDate readDate) {
         this.id = id;
         this.member = member;
         this.book = book;
@@ -51,7 +53,6 @@ public class BookReport extends BasedEntity{
         bookReport.setBook(book);
         bookReport.setMember(member);
         bookReport.setContent(content);
-
 
         return bookReport;
     }

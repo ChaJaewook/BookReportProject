@@ -31,12 +31,8 @@ public class Member extends BasedEntity{
     @OneToMany(mappedBy = "member",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<BookReport> bookReports=new ArrayList<>();
 
-    @Builder
-    public Member(Long id, String name, MemberSexual memberSexual, int age, Address address) {
-        this.id = id;
-        this.name = name;
-        this.memberSexual = memberSexual;
-        this.age = age;
-        this.address = address;
-    }
+    @OneToMany(mappedBy="order", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Order> order=new ArrayList<>();
+
+
 }
