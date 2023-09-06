@@ -27,8 +27,7 @@ public class MemberServiceTest {
     public void 회원가입()
     {
         //given
-        Member member=new Member();
-        member.setName("jaewook");
+        Member member=Member.builder().name("jaewook").build();
 
         //when
         Long saveId=memberService.join(member);

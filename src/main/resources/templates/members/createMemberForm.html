@@ -9,17 +9,16 @@
   <div th:replace="fragments/bodyHeader :: bodyHeader" />
   <main>
     <div class="py-5 text-center">
-      <h2>User Create form</h2>
+      <h2>회원 등록</h2>
     </div>
 
 
     <div class="col-md-7 col-lg-8">
-      <h4 class="mb-3">사용자 등록 창입니다.</h4>
       <form class="needs-validation" action="/members/new" th:object="${memberForm}" method="post">
         <div class="row g-3">
 
           <div class="col-12">
-            <label for="username" class="form-label">Username</label>
+            <label for="username" class="form-label">사용자 이름</label>
             <input type="text" class="form-control" th:field="*{name}" id="username" placeholder="이름을 입력하세요" required="">
             <div class="invalid-feedback">
               Please enter your shipping address.
@@ -27,7 +26,7 @@
           </div>
 
           <div class="col-12">
-            <label for="age" class="form-label">Age</label>
+            <label for="age" class="form-label">나이</label>
             <input type="text" class="form-control" th:field="*{age}" id="age" placeholder="나이를 입력하세요" required="">
             <div class="invalid-feedback">
               Please enter your age.
@@ -35,7 +34,7 @@
           </div>
 
 
-          <h4 class="col-12">성 별</h4>
+          <!--<h4 class="col-12">성 별</h4>
           <div class="my-3">
             <div class="form-check">
               <input id="man" name="sexualMethod" th:field="*{sexual}" value="man" type="radio" class="form-check-input" checked="" required="">
@@ -45,6 +44,17 @@
               <input id="woman" name="sexualMethod" th:field="*{sexual}" value="woman" type="radio" class="form-check-input" required="">
               <label class="form-check-label" for="woman">Woman</label>
             </div>
+          </div>-->
+
+          <div class="col-12">
+            <label for="age" class="form-label">성별</label>
+            <select class="form-control" th:field="*{sexual}">
+              <option th:each="sexualValue : ${T(com.bookreport.core.domain.MemberSexual).values()}"
+                      th:value="${sexualValue.name()}"
+                      th:text="${sexualValue.name()}">
+                val
+              </option>
+            </select>
           </div>
 
 

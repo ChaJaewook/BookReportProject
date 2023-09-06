@@ -32,29 +32,29 @@ public class BookService {
     public void updateBook(Long bookId, BookForm param)
     {
         Book findBook=bookRepository.findOne(bookId);
-
+        double grade=0;
         //점수 업데이트 체크 로직
         switch(param.getGrade())
         {
             case "BEST":
-                findBook.setGrade(5.0);
+                grade=5.0;
                 break;
             case "BETTER":
-                findBook.setGrade(4.0);
+                grade=4.0;
                 break;
             case "GOOD":
-                findBook.setGrade(3.0);
+                grade=3.0;
                 break;
             case "Normal":
-                findBook.setGrade(2.0);
+                grade=2.0;
                 break;
             case "BAD":
-                findBook.setGrade(1.0);
+                grade=1.0;
                 break;
         }
 
-        findBook.setAuthor(param.getAuthor());
-        findBook.setTitle(param.getTitle());
+        //변경감지 진행
+        findBook.updateBook(param.getAuthor(), param.getTitle(), grade);
     }
 
     @Transactional
