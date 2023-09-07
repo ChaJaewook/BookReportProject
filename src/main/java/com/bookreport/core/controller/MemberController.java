@@ -1,5 +1,6 @@
 package com.bookreport.core.controller;
 
+import com.bookreport.core.domain.Address;
 import com.bookreport.core.domain.Member;
 import com.bookreport.core.domain.MemberSexual;
 import com.bookreport.core.service.MemberService;
@@ -34,17 +35,13 @@ public class MemberController {
             return "members/createMemberForm";
         }
 
-        MemberSexual memS=null;
-
-        if(form.getSexual().equals("man"))
-            memS=MemberSexual.MAN;
-        else if(form.getSexual().equals("woman"))
-            memS= MemberSexual.WOMAN;
+        Address address=new Address(form.getStreet(), form.getCity(), form.getZipcode());
 
         Member member=Member.builder()
-                .memberSexual(memS)
+                .memberSexual(form.getSexual())
                 .name(form.getName())
                 .age(form.getAge())
+                .address(address)
                 .build();
 
         memberService.join(member);
@@ -66,7 +63,8 @@ public class MemberController {
         MemberForm form=new MemberForm();
         form.setId(findMember.getId());
         form.setAge(findMember.getAge());
-        form.setSexual(String.valueOf(findMember.getMemberSexual()== MemberSexual.MAN?MemberSexual.MAN:MemberSexual.WOMAN));
+        //form.setSexual(String.valueOf(findMember.getMemberSexual()== MemberSexual.MAN?MemberSexual.MAN:MemberSexual.WOMAN));
+        form.setSexual(findMember.getMemberSexual());
         form.setName(findMember.getName());
 
         model.addAttribute("member",form);

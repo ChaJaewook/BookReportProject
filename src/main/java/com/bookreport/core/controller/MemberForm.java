@@ -1,5 +1,6 @@
 package com.bookreport.core.controller;
 
+import com.bookreport.core.domain.MemberSexual;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +15,9 @@ public class MemberForm {
     @NotEmpty(message="회원 이름은 필수 입니다.")
     private String name;
     private int age;
-    private String sexual;
+    private MemberSexual sexual;
+    private String street;
+    private String city;
+    private String zipcode;
 
 }

@@ -43,7 +43,6 @@ public class Book extends BasedEntity{
     }
 
     @Builder
-
     public Book(BookCategory bookCategory, String title, String author, double grade, String isbn, Long price, int stockQuantity, LocalDateTime publish_date, String imgName, String imgPath) {
         this.bookCategory = bookCategory;
         this.title = title;
