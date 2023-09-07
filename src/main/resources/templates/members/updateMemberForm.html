@@ -9,13 +9,11 @@
   <div th:replace="fragments/bodyHeader :: bodyHeader" />
   <main>
     <div class="py-5 text-center">
-      <h2>Member Update form</h2>
+      <h2>회원 수정</h2>
     </div>
 
 
     <div class="col-md-7 col-lg-8">
-      <h4 class="mb-3">회원 수정 창입니다.</h4>
-
       <form class="needs-validation" th:object="${member}" method="post">
         <input type="hidden" th:field="*{id}"/>
         <div class="row g-3">
@@ -36,14 +34,51 @@
             </div>
           </div>
 
-          <div class="col-12">
+          <!--<div class="col-12">
             <label for="sexual" class="form-label">Select Grade</label>
             <select th:field="*{sexual}" class="form-select" id="sexual" required>
               <option th:selected="${sexual}=='MAN'" value="MAN">남자</option>
               <option th:selected="${sexual}=='WOMAN'"  value="WOMAN">여자</option>
             </select>
             <div class="invalid-feedback">Please select 성별</div>
+          </div>-->
+
+          <div class="col-12">
+            <label class="form-label">성별</label>
+            <select class="form-control" th:field="*{sexual}">
+              <option th:each="sexualValue : ${T(com.bookreport.core.domain.MemberSexual).values()}"
+                      th:value="${sexualValue.name()}"
+                      th:text="${sexualValue.name()}">
+                val
+              </option>
+            </select>
           </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <label for="street" class="form-label">거리</label>
+              <input type="text" class="form-control" th:field="*{street}" id="street" placeholder="거리를 입력하세요" required="">
+              <div class="invalid-feedback">
+                Please enter your street.
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="street" class="form-label">도시</label>
+              <input type="text" class="form-control" th:field="*{city}" id="city" placeholder="도시를 입력하세요" required="">
+              <div class="invalid-feedback">
+                Please enter your city.
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="zipcode" class="form-label">번지수</label>
+              <input type="text" class="form-control" th:field="*{zipcode}" id="zipcode" placeholder="번지를 입력하세요" required="">
+              <div class="invalid-feedback">
+                Please enter your zipcode.
+              </div>
+            </div>
+
 
         </div>
 

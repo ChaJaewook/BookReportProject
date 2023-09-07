@@ -33,7 +33,7 @@
           </div>
 
           <div class="col-12">
-            <label for="age" class="form-label">성별</label>
+            <label class="form-label">성별</label>
             <select class="form-control" th:field="*{sexual}">
               <option th:each="sexualValue : ${T(com.bookreport.core.domain.MemberSexual).values()}"
                       th:value="${sexualValue.name()}"

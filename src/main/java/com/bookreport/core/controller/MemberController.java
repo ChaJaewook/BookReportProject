@@ -63,9 +63,11 @@ public class MemberController {
         MemberForm form=new MemberForm();
         form.setId(findMember.getId());
         form.setAge(findMember.getAge());
-        //form.setSexual(String.valueOf(findMember.getMemberSexual()== MemberSexual.MAN?MemberSexual.MAN:MemberSexual.WOMAN));
         form.setSexual(findMember.getMemberSexual());
         form.setName(findMember.getName());
+        form.setCity(findMember.getAddress().getCity());
+        form.setStreet(findMember.getAddress().getStreet());
+        form.setZipcode(findMember.getAddress().getZipcode());
 
         model.addAttribute("member",form);
         return "/members/updateMemberForm";
