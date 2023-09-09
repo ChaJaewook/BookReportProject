@@ -34,7 +34,7 @@ public class BookService {
         Book findBook=bookRepository.findOne(bookId);
         double grade=0;
         //점수 업데이트 체크 로직
-        switch(param.getGrade())
+        /*switch(param.getGrade())
         {
             case "BEST":
                 grade=5.0;
@@ -51,10 +51,10 @@ public class BookService {
             case "BAD":
                 grade=1.0;
                 break;
-        }
+        }*/
 
         //변경감지 진행
-        findBook.updateBook(param.getAuthor(), param.getTitle(), grade);
+        findBook.updateBook(param.getAuthor(), param.getTitle(), param.getGrade());
     }
 
     @Transactional

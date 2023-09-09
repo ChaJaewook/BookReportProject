@@ -9,19 +9,16 @@
   <div th:replace="fragments/bodyHeader :: bodyHeader" />
   <main>
     <div class="py-5 text-center">
-      <h2>Book Create form</h2>
+      <h2>책 등록 페이지</h2>
     </div>
 
 
     <div class="col-md-7 col-lg-8">
-      <h4 class="mb-3">책 등록 창입니다.</h4>
-      <!-- enctype은 form데이터가 날아갈때 인코딩 타입을 설정 post에서만 사용가능-->
-      <!-- form 요소가 이미지나 파일일 경우 자주 사용-->
       <form class="needs-validation" action="/books/new" th:object="${bookForm}" method="post" enctype="multipart/form-data">
         <div class="row g-3">
 
           <div class="col-12">
-            <label for="title" class="form-label">Book Title</label>
+            <label for="title" class="form-label">제목</label>
             <input type="text" class="form-control" th:field="*{title}" id="title" placeholder="책 제목을 입력하세요" required="">
             <div class="invalid-feedback">
               Please enter your Book Title
@@ -29,7 +26,7 @@
           </div>
 
           <div class="col-12">
-            <label for="author" class="form-label">Author</label>
+            <label for="author" class="form-label">저자</label>
             <input type="text" class="form-control" th:field="*{author}" id="author" placeholder="저자를 입력하세요" required="">
             <div class="invalid-feedback">
               Please enter author.
@@ -37,7 +34,7 @@
           </div>
 
 
-          <div class="col-12">
+          <!--<div class="col-12">
             <label for="grade" class="form-label">Select Grade</label>
             <select th:field="*{grade}" class="form-select" id="grade" required>
               <option value="BEST">Best</option>
@@ -47,10 +44,21 @@
               <option value="BAD">Bad</option>
             </select>
             <div class="invalid-feedback">Please select</div>
+          </div>-->
+
+          <div class="col-12">
+            <label class="form-label">책 카테고리</label>
+            <select class="form-control" th:field="*{category}">
+              <option th:each="categoryValue : ${T(com.bookreport.core.domain.BookCategory).values()}"
+                      th:value="${categoryValue.name()}"
+                      th:text="${categoryValue.name()}">
+                val
+              </option>
+            </select>
           </div>
 
           <div class="col-12">
-          <label for="isbn" class="form-label">ISBN</label>
+          <label for="isbn" class="form-label">ISBN 코드</label>
           <input type="text" class="form-control" th:field="*{isbn}" id="isbn" placeholder="isbn을 입력하세요" required="">
           <div class="invalid-feedback">
             Please enter ISBN.
@@ -58,22 +66,30 @@
           </div>
 
           <div class="col-12">
-          <label for="sold" class="form-label">Sold</label>
-          <input type="text" class="form-control" th:field="*{sold}" id="sold" placeholder="수량을 입력하세요" required="">
+          <label for="price" class="form-label">가격</label>
+          <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="가격을 입력하세요" required="">
           <div class="invalid-feedback">
-            Please enter Sold.
+            Please enter Price.
           </div>
           </div>
 
           <div class="col-12">
-          <label for="publish_date" class="form-label">Publish Date</label>
-          <input type="date" class="form-control" th:field="*{publish_date}" id="publish_date" placeholder="출판일을 선택하세요" required="">
+            <label for="stockQuantity" class="form-label">수량</label>
+            <input type="text" class="form-control" th:field="*{stockQuantity}" id="stockQuantity" placeholder="수량을 입력하세요" required="">
+            <div class="invalid-feedback">
+              Please enter stock.
+            </div>
+          </div>
+
+          <div class="col-12">
+          <label for="publishDate" class="form-label">출판일</label>
+          <input type="date" class="form-control" th:field="*{publishDate}" id="publishDate" placeholder="출판일을 선택하세요" required="">
           <div class="invalid-feedback">
             Please enter Publish Date.
           </div>
           </div>
 
-          <div class="col-12">
+          <!--<div class="col-12">
             <label for="category" class="form-label">Select Category</label>
             <select th:field="*{category}" class="form-select" id="category" required>
               <option value="COMIC">COMIC</option>
@@ -81,6 +97,17 @@
               <option value="DOCUMENTARY">DOCUMENTARY</option>
             </select>
             <div class="invalid-feedback">Please select Category</div>
+          </div>-->
+
+          <div class="col-12">
+            <label class="form-label">책 평점</label>
+            <select class="form-control" th:field="*{grade}">
+              <option th:each="gradeValue : ${T(com.bookreport.core.domain.Grade).values()}"
+                      th:value="${gradeValue.name()}"
+                      th:text="${gradeValue.name()}">
+                val
+              </option>
+            </select>
           </div>
 
           <div class="col-12">

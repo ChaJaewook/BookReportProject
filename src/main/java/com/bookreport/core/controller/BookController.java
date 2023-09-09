@@ -2,7 +2,6 @@ package com.bookreport.core.controller;
 
 import com.bookreport.core.domain.Book;
 import com.bookreport.core.domain.BookCategory;
-import com.bookreport.core.repository.BookRepository;
 import com.bookreport.core.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,8 +13,6 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,9 +37,9 @@ public class BookController {
 
         BookCategory bookC=null;
 
-        DateTimeFormatter dateF=DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate ld=LocalDate.parse(form.getPublish_date(),dateF);
-        LocalDateTime ldt=LocalDateTime.of(ld,LocalDateTime.now().toLocalTime());
+        //ateTimeFormatter dateF=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate ld=form.getPublishDate();
+        //LocalDateTime ldt=LocalDateTime.of(ld,LocalDateTime.now().toLocalTime());
 
         String oriImgName=form.getImgFile().getOriginalFilename();
         String imgName="";
@@ -60,7 +57,7 @@ public class BookController {
 
 
 
-        double bookGrade=0;
+        /*double bookGrade=0;
         switch(form.getGrade())
         {
             case "BEST":
@@ -80,9 +77,9 @@ public class BookController {
                 break;
             default:
                 break;
-        }
+        }*/
 
-        switch(form.getCategory())
+        /*switch(form.getCategory())
         {
             case "COMIC":
                 bookC=BookCategory.COMIC;
@@ -93,17 +90,17 @@ public class BookController {
             case "DOCUMENTARY":
                 bookC=BookCategory.DOCUMENTARY;
                 break;
-        }
+        }*/
 
         Book book=Book.builder()
                 .title(form.getTitle())
                 .author(form.getAuthor())
-                .grade(bookGrade)
+                .grade(form.getGrade())
                 .isbn(form.getIsbn())
                 .imgPath("/img/"+imgName)
                 .imgName(imgName)
-                .publish_date(ldt)
-                .bookCategory(bookC)
+                .publishDate(form.getPublishDate())
+                .bookCategory(form.getCategory())
                 .build();
 
         bookService.saveBook(book);
@@ -129,7 +126,7 @@ public class BookController {
         bookForm.setAuthor(book.getAuthor());
         bookForm.setIsbn(book.getIsbn());
 
-        String grade="";
+        /*String grade="";
         if(book.getGrade()==5.0)
             grade="BEST";
         else if(book.getGrade()==4.0)
@@ -139,9 +136,9 @@ public class BookController {
         else if(book.getGrade()==2.0)
             grade="NORMAL";
         else if(book.getGrade()==1.0)
-            grade="BAD";
-        bookForm.setGrade(grade);
-        bookForm.setPublish_date(book.getPublish_date().toString());
+            grade="BAD";*/
+        bookForm.setGrade(book.getGrade());
+        bookForm.setPublishDate(book.getPublishDate());
         bookForm.setTitle(book.getTitle());
 
 

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,13 @@ public class Book extends BasedEntity{
 
     private String title;
     private String author;
-    private double grade;
+    //private double grade;
+    @Embedded
+    private Grade grade;
     private String isbn;
     private Long price;
     private int stockQuantity;
-    private LocalDateTime publish_date;
+    private LocalDate publishDate;
     private String imgName; //이미지 파일명
     private String imgPath; //이미지 조회 경로
 
@@ -35,7 +38,7 @@ public class Book extends BasedEntity{
     @OneToMany(mappedBy = "book",fetch = FetchType.LAZY)
     private List<BookReport> bookReport=new ArrayList<>();
 
-    public void updateBook(String author, String title, double grade)
+    public void updateBook(String author, String title, Grade grade)
     {
         this.author=author;
         this.title=title;
@@ -43,7 +46,8 @@ public class Book extends BasedEntity{
     }
 
     @Builder
-    public Book(BookCategory bookCategory, String title, String author, double grade, String isbn, Long price, int stockQuantity, LocalDateTime publish_date, String imgName, String imgPath) {
+    public Book(BookCategory bookCategory, String title, String author, Grade grade, String isbn, Long price,
+                int stockQuantity, LocalDate publishDate, String imgName, String imgPath) {
         this.bookCategory = bookCategory;
         this.title = title;
         this.author = author;
@@ -51,7 +55,7 @@ public class Book extends BasedEntity{
         this.isbn = isbn;
         this.price = price;
         this.stockQuantity = stockQuantity;
-        this.publish_date = publish_date;
+        this.publishDate = publishDate;
         this.imgName = imgName;
         this.imgPath = imgPath;
 

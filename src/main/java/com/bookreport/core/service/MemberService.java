@@ -1,6 +1,7 @@
 package com.bookreport.core.service;
 
 import com.bookreport.core.controller.MemberForm;
+import com.bookreport.core.domain.Address;
 import com.bookreport.core.domain.Member;
 import com.bookreport.core.domain.MemberSexual;
 import com.bookreport.core.repository.MemberRepository;
@@ -54,11 +55,9 @@ public class MemberService {
 
         findMember.setName(form.getName());
         findMember.setAge(form.getAge());
-
-        if(form.getSexual().equals("MAN"))
-            findMember.setMemberSexual(MemberSexual.MAN);
-        else if(form.getSexual().equals("WOMAN"))
-            findMember.setMemberSexual(MemberSexual.WOMAN);
+        findMember.setMemberSexual(form.getSexual());
+        Address editAddress=new Address(form.getStreet(), form.getCity(), form.getZipcode());
+        findMember.setAddress(editAddress);
 
     }
 
