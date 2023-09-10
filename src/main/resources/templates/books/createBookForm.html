@@ -89,16 +89,6 @@
           </div>
           </div>
 
-          <!--<div class="col-12">
-            <label for="category" class="form-label">Select Category</label>
-            <select th:field="*{category}" class="form-select" id="category" required>
-              <option value="COMIC">COMIC</option>
-              <option value="HISTORY">HISTORY</option>
-              <option value="DOCUMENTARY">DOCUMENTARY</option>
-            </select>
-            <div class="invalid-feedback">Please select Category</div>
-          </div>-->
-
           <div class="col-12">
             <label class="form-label">책 평점</label>
             <select class="form-control" th:field="*{grade}">
@@ -111,8 +101,8 @@
           </div>
 
           <div class="col-12">
-            <label for="imgFile" class="form-label">Upload Book Image</label>
-            <input type="file" th:field="*{imgFile}" class="form-select" id="imgFile" required/>
+            <label class="form-label">Upload Book Image</label>
+            <input type="file" th:field="*{imgFile}" class="form-select" th:id="imgFile" accept=".jpg,.png" required/>
           </div>
 
         </div>

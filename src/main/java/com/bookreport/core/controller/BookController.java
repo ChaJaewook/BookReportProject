@@ -35,62 +35,16 @@ public class BookController {
             return "/books/createBookForm";
         }
 
-        BookCategory bookC=null;
-
-        //ateTimeFormatter dateF=DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate ld=form.getPublishDate();
-        //LocalDateTime ldt=LocalDateTime.of(ld,LocalDateTime.now().toLocalTime());
-
         String oriImgName=form.getImgFile().getOriginalFilename();
         String imgName="";
 
         String projectPath=System.getProperty("user.dir")+"/src/main/resources/static/img/";
         UUID uuid= UUID.randomUUID();
-
         String savedFileName=uuid+"_"+oriImgName;
-
         imgName=savedFileName;
-
         File saveFile=new File(projectPath,imgName);
-
         form.getImgFile().transferTo(saveFile);
 
-
-
-        /*double bookGrade=0;
-        switch(form.getGrade())
-        {
-            case "BEST":
-                bookGrade=5.0;
-                break;
-            case "BETTER":
-                bookGrade=4.0;
-                break;
-            case "GOOD":
-                bookGrade=3.0;
-                break;
-            case "NORMAL":
-                bookGrade=2.0;
-                break;
-            case "BAD":
-                bookGrade=1.0;
-                break;
-            default:
-                break;
-        }*/
-
-        /*switch(form.getCategory())
-        {
-            case "COMIC":
-                bookC=BookCategory.COMIC;
-                break;
-            case "HISTORY":
-                bookC=BookCategory.HISTORY;
-                break;
-            case "DOCUMENTARY":
-                bookC=BookCategory.DOCUMENTARY;
-                break;
-        }*/
 
         Book book=Book.builder()
                 .title(form.getTitle())

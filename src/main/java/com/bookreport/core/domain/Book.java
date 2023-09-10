@@ -45,6 +45,10 @@ public class Book extends BasedEntity{
         this.grade=grade;
     }
 
+    protected Book() {
+    }
+
+
     @Builder
     public Book(BookCategory bookCategory, String title, String author, Grade grade, String isbn, Long price,
                 int stockQuantity, LocalDate publishDate, String imgName, String imgPath) {

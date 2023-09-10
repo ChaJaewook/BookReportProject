@@ -18,15 +18,9 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           <div class="col" th:each="book : ${books}">
             <div class="card shadow-sm">
-              <!--<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: صورة مصغرة" preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"></rect>
-                <text x="50%" y="50%" fill="#eceeef" dy=".3em">صورة مصغرة</text>
-              </svg>-->
 
-              <!--<img class="img-fluid" width="100%" height="225" th:src="@{${book.imgPath}}"/>-->
-              <img  width="100%" height="225" th:src="@{${book.imgPath}}"/>
-              <!--<img  width="100%" height="225" th:src="@{/resources/static}+${book.imgPath}"/>-->
+              <img  width="100%" height="225" th:src="${book.imgPath}"/>
+              <!--<img  width="100%" th:src="@{/img/6ed21880-cbc7-4322-9c2d-9f52ddf78934_KakaoTalk_20220809_235737607.jpg}" alt="첨부이미지" th:if="${book.imgPath !=null}"/>-->
               <div class="card-body">
                 <p class="card-text" th:text="${book.title}"></p>
                 <div class="d-flex justify-content-between align-items-center">
