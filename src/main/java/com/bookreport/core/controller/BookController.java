@@ -53,6 +53,8 @@ public class BookController {
                 .isbn(form.getIsbn())
                 .imgPath("/img/"+imgName)
                 .imgName(imgName)
+                .price(form.getPrice())
+                .stockQuantity(form.getStockQuantity())
                 .publishDate(form.getPublishDate())
                 .bookCategory(form.getCategory())
                 .build();
@@ -73,31 +75,22 @@ public class BookController {
     @GetMapping("/books/{id}/edit")
     public String updateBookForm(@PathVariable("id") Long bookId, Model model)
     {
-        Book book=(Book)bookService.findOne(bookId);
+        Book book=bookService.findOne(bookId);
 
         BookForm bookForm=new BookForm();
         bookForm.setId(book.getId());
         bookForm.setAuthor(book.getAuthor());
         bookForm.setIsbn(book.getIsbn());
-
-        /*String grade="";
-        if(book.getGrade()==5.0)
-            grade="BEST";
-        else if(book.getGrade()==4.0)
-            grade="BETTER";
-        else if(book.getGrade()==3.0)
-            grade="GOOD";
-        else if(book.getGrade()==2.0)
-            grade="NORMAL";
-        else if(book.getGrade()==1.0)
-            grade="BAD";*/
         bookForm.setGrade(book.getGrade());
+        bookForm.setCategory(book.getBookCategory());
         bookForm.setPublishDate(book.getPublishDate());
+        bookForm.setPrice(book.getPrice());
+        bookForm.setStockQuantity(book.getStockQuantity());
         bookForm.setTitle(book.getTitle());
 
 
         model.addAttribute("form",bookForm);
-        return "/books/updateBookForm";
+        return "books/updateBookForm";
     }
 
     @PostMapping("/books/{bookId}/edit")

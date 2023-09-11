@@ -25,7 +25,7 @@ public class Book extends BasedEntity{
     private String title;
     private String author;
     //private double grade;
-    @Embedded
+    @Enumerated(EnumType.STRING)
     private Grade grade;
     private String isbn;
     private Long price;
@@ -38,11 +38,15 @@ public class Book extends BasedEntity{
     @OneToMany(mappedBy = "book",fetch = FetchType.LAZY)
     private List<BookReport> bookReport=new ArrayList<>();
 
-    public void updateBook(String author, String title, Grade grade)
+    public void updateBook(String author, String title, Grade grade,
+                           BookCategory category, Long price, int stockQuantity)
     {
         this.author=author;
         this.title=title;
         this.grade=grade;
+        this.bookCategory=category;
+        this.price=price;
+        this.stockQuantity=stockQuantity;
     }
 
     protected Book() {
