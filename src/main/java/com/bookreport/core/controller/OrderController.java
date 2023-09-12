@@ -1,0 +1,43 @@
+package com.bookreport.core.controller;
+
+import com.bookreport.core.domain.Book;
+import com.bookreport.core.domain.Member;
+import com.bookreport.core.service.BookService;
+import com.bookreport.core.service.MemberService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
+@Controller
+@RequiredArgsConstructor
+public class OrderController {
+
+    private final MemberService memberService;
+    private final BookService bookService;
+
+    @GetMapping("/orders")
+    public String createForm(Model model)
+    {
+        List<Member> members=memberService.findMembers();
+        List<Book> books= bookService.findBooks();
+        model.addAttribute("books",books);
+        model.addAttribute("members",members);
+
+        return "orders/ordersForm";
+    }
+
+    /*@PostMapping("/orders")
+    public String order(
+            @RequestParam("memberId") Long memberId,
+            @RequestParam("bookId") Long bookId,
+            @RequestParam("count") int count
+    )
+    {
+
+    }*/
+}

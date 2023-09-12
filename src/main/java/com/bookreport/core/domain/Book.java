@@ -1,5 +1,6 @@
 package com.bookreport.core.domain;
 
+import com.bookreport.core.exception.NotEnoughStockException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -50,6 +51,15 @@ public class Book extends BasedEntity{
     }
 
     protected Book() {
+    }
+
+    public void removeStock(int count)
+    {
+        int restStock=this.stockQuantity-count;
+        if(restStock<0)
+            throw new NotEnoughStockException("need more stack");
+
+        this.stockQuantity=restStock;
     }
 
 

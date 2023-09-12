@@ -1,11 +1,13 @@
 package com.bookreport.core.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 public class BookOrder extends BasedEntity {
 
     @Id
@@ -23,5 +25,12 @@ public class BookOrder extends BasedEntity {
     private Long orderPrice;
 
     private int count;
+
+    public void createBookOrder(Book book, int count)
+    {
+        this.book=book;
+        this.orderPrice=book.getPrice();
+        this.count=count;
+    }
 
 }
