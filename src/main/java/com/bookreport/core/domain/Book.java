@@ -62,6 +62,10 @@ public class Book extends BasedEntity{
         this.stockQuantity=restStock;
     }
 
+    public void addStock(int stock){
+        this.stockQuantity+=stock;
+    }
+
 
     @Builder
     public Book(BookCategory bookCategory, String title, String author, Grade grade, String isbn, Long price,

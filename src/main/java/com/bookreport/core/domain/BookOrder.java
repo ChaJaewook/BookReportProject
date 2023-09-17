@@ -1,5 +1,6 @@
 package com.bookreport.core.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,12 +26,34 @@ public class BookOrder extends BasedEntity {
     private Long orderPrice;
 
     private int count;
+    @Builder
+    public BookOrder(Long id, Order order, Book book, Long orderPrice, int count) {
+        this.id = id;
+        this.order = order;
+        this.book = book;
+        this.orderPrice = orderPrice;
+        this.count = count;
+    }
 
-    public void createBookOrder(Book book, int count)
+
+
+
+    public static BookOrder createBookOrder(Book book, int count)
     {
-        this.book=book;
-        this.orderPrice=book.getPrice();
-        this.count=count;
+        BookOrder orderItem=BookOrder
+                .builder()
+                .book(book)
+                .orderPrice(book.getPrice())
+                .count(count)
+                .build();
+
+        book.removeStock(count);
+
+        return orderItem;
+    }
+
+    public void cancel(){
+        getBook().re
     }
 
 }
