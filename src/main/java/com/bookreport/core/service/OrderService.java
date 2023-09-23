@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 
 @Service
-@Transactional(readOnly = true0)
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
@@ -25,10 +25,25 @@ public class OrderService {
         Book findBook=bookRepository.findOne(bookId);
         Member findMember=memberRepository.findOne(memberId);
 
-        Delivery delivery=new Delivery();
-        delivery.setAddress(findMember.getAddress());
+        //Delivery delivery=new Delivery();
+        //delivery.setAddress(findMember.getAddress());
+
+        Delivery delivery=Delivery.builder().address(findMember.getAddress()).build();
 
 
+        BookOrder orderItem=BookOrder.createBookOrder(findBook, count);
 
+        Order order=Order.createOrder(findMember,delivery,orderItem);
+
+        orderRepository.save(order);
+        return order.getId();
+    }
+
+    @Transactional
+    public void cancelOrder(Long orderId)
+    {
+        //조회
+        Order order=orderRepository.findById(orderId);
+        order.cancel();
     }
 }

@@ -27,7 +27,7 @@ public class OrderController {
     {
         List<Member> members=memberService.findMembers();
         List<Book> books= bookService.findBooks();
-        model.addAttribute("books",books);
+        model.addAttribute("items",books);
         model.addAttribute("members",members);
 
         return "orders/ordersForm";
@@ -36,10 +36,12 @@ public class OrderController {
     @PostMapping("/orders")
     public String order(
             @RequestParam("memberId") Long memberId,
-            @RequestParam("bookId") Long bookId,
+            @RequestParam("itemId") Long bookId,
             @RequestParam("count") int count
     )
     {
-        orderService.
+        Long id=orderService.order(memberId, bookId, count);
+
+        return "redirect:/";
     }
 }

@@ -25,7 +25,6 @@ public class Book extends BasedEntity{
 
     private String title;
     private String author;
-    //private double grade;
     @Enumerated(EnumType.STRING)
     private Grade grade;
     private String isbn;

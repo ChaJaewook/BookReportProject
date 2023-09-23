@@ -15,12 +15,12 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="item">상품명</label>
+      <label for="item">책명</label>
       <select name="itemId" id="item" class="form-control">
-        <option value="">상품선택</option>
+        <option value="">책선택</option>
         <option th:each="item : ${items}"
                 th:value="${item.id}"
-                th:text="${item.name}" />
+                th:text="${item.title}" />
       </select>
     </div>
     <div class="form-group">

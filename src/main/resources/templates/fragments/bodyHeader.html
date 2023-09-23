@@ -1,8 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="header" th:fragment="bodyHeader">
-  <ul class="nav nav-pills pull-right">
+  <!--<ul class="nav nav-pills pull-right">
     <li><a href="/">Home</a></li>
   </ul>
-  <a href="/"><h3 class="text-muted">Book Report Project</h3></a>
+  <a href="/"><h3 class="text-muted">Book Report Project</h3></a>-->
+
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#">회원<i class='fa fa-angle-down'></i></a>
+          <ul>
+            <li><a href="/members/new">회원가입</a></li>
+            <li><a href="/members">회원목록</a></li>
+          </ul>
+        </li>
+        <li class='sub-menu'> <a href="#">책<i class='fa fa-angle-down'></i></a>
+          <ul>
+            <li><a href="/books/new">책 등록</a></li>
+            <li><a href="/books">책 목록</a></li>
+          </ul>
+        </li>
+        <li class='sub-menu'> <a href="#">독후감<i class='fa fa-angle-down'></i></a>
+          <ul>
+            <li><a href="/bookreports/new">독후감 등록</a></li>
+            <li><a href="/bookreports">독후감 목록</a></li>
+          </ul>
+        </li>
+        <li><a href="#">주문<i class='fa fa-angle-down'></i></a>
+          <ul>
+            <li><a href="/orders/new">주문 등록</a></li>
+            <li><a href="/orders">주문 목록</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script>
+    $('nav li').hover(
+        function() {
+            $('ul', this).stop().slideDown(200);
+        },
+        function() {
+            $('ul', this).stop().slideUp(200);
+        }
+    );
+</script>
 </div>

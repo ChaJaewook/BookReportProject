@@ -2,7 +2,9 @@ package com.bookreport.core.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Fetch;
+import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,8 +13,8 @@ import java.util.List;
 
 @Entity
 @Getter
-@Builder
 @Table(name="Orders")
+@Setter
 public class Order {
     @Id
     @GeneratedValue
@@ -22,15 +24,16 @@ public class Order {
     @JoinColumn(name="member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     List<BookOrder> bookOrders=new ArrayList<>();
 
     private LocalDate orderDate;
 
-    @OneToOne(fetch=FetchType.LAZY)
+    @OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name="delivery_id")
     private Delivery delivery;
 
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     public void setMember(Member member) {
@@ -49,16 +52,28 @@ public class Order {
         delivery.setOrder(this);
     }
 
-    public void createOrder(Member member,  Delivery delivery, BookOrder... bookOrders)
+    public static Order createOrder(Member member,  Delivery delivery, BookOrder... bookOrders)
     {
-        this.member=member;
-        for(BookOrder item : bookOrders)
+
+
+        /*Order order= Order.builder()
+                .member(member)
+                .delivery(delivery)
+                .bookOrders(bookOrderList)
+                .build();*/
+
+        Order order=new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+        for(BookOrder item: bookOrders)
         {
-            this.bookOrders.add(item);
+            order.addBookOrder(item);
         }
-        this.delivery=delivery;
-        this.status=OrderStatus.ORDER;
-        this.orderDate=LocalDate.now();
+
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDate.now());
+
+        return order;
     }
 
     public void cancel()

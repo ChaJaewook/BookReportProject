@@ -35,9 +35,6 @@ public class BookOrder extends BasedEntity {
         this.count = count;
     }
 
-
-
-
     public static BookOrder createBookOrder(Book book, int count)
     {
         BookOrder orderItem=BookOrder
@@ -53,7 +50,12 @@ public class BookOrder extends BasedEntity {
     }
 
     public void cancel(){
-        getBook().re
+        getBook().addStock(count);
+    }
+
+    public long getTotalPrice()
+    {
+        return getOrderPrice()*getCount();
     }
 
 }
