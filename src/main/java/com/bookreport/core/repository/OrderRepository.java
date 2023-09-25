@@ -2,11 +2,11 @@ package com.bookreport.core.repository;
 
 import com.bookreport.core.domain.Order;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import static com.bookreport.core.domain.QOrder.order;
 
 @Repository
 @RequiredArgsConstructor
@@ -25,5 +25,10 @@ public class OrderRepository {
     public Long save(Order order){
         em.persist(order);
         return order.getId();
+    }
+
+    public List<Order> searchOrder()
+    {
+        return null;
     }
 }

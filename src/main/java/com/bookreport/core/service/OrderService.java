@@ -8,8 +8,10 @@ import lombok.RequiredArgsConstructor;
 import net.bytebuddy.asm.Advice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -45,5 +47,10 @@ public class OrderService {
         //조회
         Order order=orderRepository.findById(orderId);
         order.cancel();
+    }
+
+    public List<Order> findOrders(){
+        List<Order> orderList=orderRepository.findAll();
+        return orderList;
     }
 }

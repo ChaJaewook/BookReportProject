@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import static com.bookreport.core.domain.QMember.member;
 
 @Entity
 @Getter
