@@ -106,4 +106,15 @@ public class BookController {
         return "redirect:/books";
     }
 
+
+    @GetMapping("/books/search")
+    public String deleteBook(
+            @RequestParam("searchType") String searchType,
+            @RequestParam("searchWord")String searchWord,
+            @RequestParam("offset")int page)
+    {
+        List<Book> findBooks=bookService.searchBooks(searchType, searchWord, page);
+
+        return "books/bookList";
+    }
 }

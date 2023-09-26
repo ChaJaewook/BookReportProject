@@ -7,7 +7,22 @@
 <body>
 <div class="container">
   <div th:replace="fragments/bodyHeader :: bodyHeader" />
+
   <div class="jumbotron">
+
+    <div class="col-12">
+      <form action="/books/search" method="get">
+        <select name="searchType">
+          <option value="bookWhole">전 체</option>
+          <option value="bookTitle">책 이름</option>
+          <option value="bookAuthor">책 저자</option>
+          </option>
+        </select>
+        <input type="text" class="form-control"  id="searchWord" placeholder="이름을 입력하세요" required="">
+      </form>
+    </div>
+
+
     <h1>Book Report Project</h1>
     <p class="lead">회원기능</p>
     <p>

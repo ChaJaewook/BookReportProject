@@ -3,6 +3,7 @@ package com.bookreport.core.service;
 import com.bookreport.core.controller.BookForm;
 import com.bookreport.core.domain.Book;
 import com.bookreport.core.repository.BookRepository;
+import com.querydsl.core.QueryResults;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +50,14 @@ public class BookService {
         return bookRepository.findAll();
     }
 
+    public List<Book> searchBooks(String searchType, String searchWord, int offset)
+    {
+        QueryResults<Book> results=bookRepository.search(searchType, searchWord, offset);
+        long count=results.getTotal();
+        List<Book> books=results.getResults();
+
+        return books;
+    }
     //@Transactional
     public Book findOne(Long book_id)
     {
