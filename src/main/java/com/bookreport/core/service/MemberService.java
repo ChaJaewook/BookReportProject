@@ -1,16 +1,16 @@
 package com.bookreport.core.service;
 
 import com.bookreport.core.controller.MemberForm;
-import com.bookreport.core.domain.Address;
-import com.bookreport.core.domain.Member;
-import com.bookreport.core.domain.MemberSexual;
+import com.bookreport.core.domain.*;
 import com.bookreport.core.repository.MemberRepository;
+import com.querydsl.core.QueryResults;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
     @NoArgsConstructor : 파라미터가 없는 기본생성자(Student std=new Student() )
@@ -67,5 +67,21 @@ public class MemberService {
         Member removeMember= memberRepository.findOne(id);
         memberRepository.delete(removeMember);
         return id;
+    }
+
+    public MemberListResponseDto searchMember(String type, String card, int offset)
+    {
+        QueryResults<Member> results=memberRepository.memberListSearch(type, card, offset);
+        List<Member> findMembers=results.getResults();
+
+        List<MemberResponseDto> memberResponseList= findMembers
+                .stream()
+                .map(o-> new MemberResponseDto(o))
+                .collect(Collectors.toList());
+
+        long count=results.getTotal();
+
+        return new MemberListResponseDto(count, memberResponseList);
+
     }
 }
